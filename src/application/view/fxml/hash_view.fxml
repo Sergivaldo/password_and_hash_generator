@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="327.0" prefWidth="216.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.HashViewController">
+   <children>
+      <VBox alignment="CENTER" spacing="10.0">
+         <children>
+            <ComboBox prefHeight="31.0" prefWidth="129.0" promptText="Hash Function" stylesheets="@../css/combo_box.css" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="177.0" prefWidth="216.0" spacing="10.0">
+         <children>
+            <TextField maxWidth="-Infinity" prefHeight="30.0" prefWidth="188.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-width: 3; -fx-border-color: #454D80; -fx-border-radius: 4; -fx-text-fill: #6c7ac6; -fx-prompt-text-fill: #6c7ac6;" />
+            <Label fx:id="password_text1" alignment="CENTER" cache="true" layoutX="10.0" layoutY="10.0" prefHeight="92.0" prefWidth="186.0" style="-fx-background-color: #454D80; -fx-background-radius: 4;" text="Hash code" textAlignment="CENTER" textFill="#b7c3ff" wrapText="true" />
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" spacing="35.0">
+         <children>
+            <Button fx:id="gen_btt" mnemonicParsing="false" onAction="#create_pass" prefWidth="69.0" style="-fx-background-color: #0C1133; -fx-border-color: #454D80; -fx-border-width: 2; -fx-border-radius: 3;" text="Generate" textFill="#6c7ac6" />
+            <Button fx:id="copy_btt" mnemonicParsing="false" onAction="#copy" prefWidth="69.0" style="-fx-background-color: #0C1133; -fx-border-color: #454D80; -fx-border-width: 2; -fx-border-radius: 3;" text="Copy" textFill="#6c7ac6" />
+         </children>
+      </HBox>
+      <Label fx:id="message_label" textAlignment="CENTER" textFill="#b2822a" />
+   </children>
+   <padding>
+      <Insets top="15.0" />
+   </padding>
+</VBox>

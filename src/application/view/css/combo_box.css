@@ -1,0 +1,16 @@
+.combo-box-base{
+	-fx-background-color: transparent;
+	-fx-border-color: #454D80;
+	-fx-border-width: 3;
+	-fx-border-radius:4;
+}
+
+.combo-box-base .text{
+	-fx-fill: #6c7ac6;
+	
+}
+
+.combo-box-base .arrow-button .arrow{
+	-fx-background-color: #454D80;
+}
+
