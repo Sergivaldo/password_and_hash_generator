@@ -17,7 +17,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		Pane root = FXMLLoader.load(getClass().getResource("/application/view/fxml/password_generator_view.fxml"));
-		Scene scene = new Scene(root,250,400);
+		Scene scene = new Scene(root);
 		primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setScene(scene);
 		primaryStage.show();

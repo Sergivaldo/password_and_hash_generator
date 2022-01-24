@@ -59,8 +59,12 @@ public class GeneratorController implements Initializable {
 	}
 	
 	private void set_color_btt(Button btt_pressed, Button unpressed_btt){
-		btt_pressed.setStyle("-fx-background-color:#454D80; -fx-background-radius:0;");
-		unpressed_btt.setStyle("-fx-background-color:#0C1133; -fx-background-radius:0;");
+		String style_pressed_btt = "-fx-background-color:#D1C4E9; -fx-background-radius:12; "
+				+ "-fx-font-weight:bold; -fx-text-fill:#0c1133; -fx-font-size:11;";
+		String style_unpressed_btt = "-fx-background-color:transparent; -fx-text-fill:#D1C4E9; -fx-font-weight:400; -fx-font-size:11;";
+		
+		btt_pressed.setStyle(style_pressed_btt);
+		unpressed_btt.setStyle(style_unpressed_btt);
 	}
 	
 
