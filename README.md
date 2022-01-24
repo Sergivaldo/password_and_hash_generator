@@ -1,0 +1,3 @@
+# Gerador de senhas e hashs
+
+⚙ Projeto em desenvolvimento...
