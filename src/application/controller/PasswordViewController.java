@@ -48,7 +48,8 @@ public class PasswordViewController implements Initializable {
 
 	@FXML
 	private Button close_btt;
-
+	@FXML
+	private CheckBox check_number;
 	@FXML
 	private CheckBox check_symbol;
 

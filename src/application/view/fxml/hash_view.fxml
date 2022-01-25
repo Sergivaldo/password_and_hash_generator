@@ -1,35 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="327.0" prefWidth="216.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.HashViewController">
+<VBox alignment="TOP_CENTER" prefHeight="454.0" prefWidth="214.0" spacing="12.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.HashViewController">
    <children>
-      <VBox alignment="CENTER" spacing="10.0">
-         <children>
-            <ComboBox prefHeight="31.0" prefWidth="129.0" promptText="Hash Function" stylesheets="@../css/combo_box.css" />
-         </children>
-      </VBox>
-      <VBox alignment="CENTER" prefHeight="177.0" prefWidth="216.0" spacing="10.0">
-         <children>
-            <TextField maxWidth="-Infinity" prefHeight="30.0" prefWidth="188.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-width: 3; -fx-border-color: #454D80; -fx-border-radius: 4; -fx-text-fill: #6c7ac6; -fx-prompt-text-fill: #6c7ac6;" />
-            <Label fx:id="password_text1" alignment="CENTER" cache="true" layoutX="10.0" layoutY="10.0" prefHeight="92.0" prefWidth="186.0" style="-fx-background-color: #454D80; -fx-background-radius: 4;" text="Hash code" textAlignment="CENTER" textFill="#b7c3ff" wrapText="true" />
-         </children>
-      </VBox>
+      <ComboBox fx:id="hash_combo" prefHeight="31.0" prefWidth="129.0" promptText="Hash Function" stylesheets="@../css/combo_box.css">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </ComboBox>
+      <TextArea prefHeight="150.0" prefWidth="186.0" promptText="Insert the text..." stylesheets="@../css/text_area.css">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </TextArea>
+      <Label fx:id="hash_lbl" alignment="TOP_LEFT" cache="true" contentDisplay="TEXT_ONLY" lineSpacing="4.0" prefHeight="150.0" prefWidth="186.0" style="-fx-background-color: #454D80;; -fx-background-radius: 15;" textAlignment="CENTER" textFill="#d1c4e9" wrapText="true">
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
+         </padding>
+      </Label>
       <HBox alignment="CENTER" spacing="35.0">
          <children>
-            <Button fx:id="gen_btt" mnemonicParsing="false" onAction="#create_pass" prefWidth="69.0" style="-fx-background-color: #0C1133; -fx-border-color: #454D80; -fx-border-width: 2; -fx-border-radius: 3;" text="Generate" textFill="#6c7ac6" />
-            <Button fx:id="copy_btt" mnemonicParsing="false" onAction="#copy" prefWidth="69.0" style="-fx-background-color: #0C1133; -fx-border-color: #454D80; -fx-border-width: 2; -fx-border-radius: 3;" text="Copy" textFill="#6c7ac6" />
+            <Button fx:id="gen_btt" mnemonicParsing="false" onAction="#create_pass" prefWidth="69.0" style="-fx-background-color: #d1c4e9; -fx-background-radius: 12;" text="Generate" textFill="#0c1133">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="copy_btt" mnemonicParsing="false" onAction="#copy" prefWidth="69.0" style="-fx-background-color: #0C1133; -fx-background-radius: 12; -fx-border-color: #d1c4e9; -fx-border-width: 2; -fx-border-radius: 12;" text="Copy" textFill="#d1c4e9">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
       </HBox>
       <Label fx:id="message_label" textAlignment="CENTER" textFill="#b2822a" />
    </children>
    <padding>
-      <Insets top="15.0" />
+      <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
    </padding>
 </VBox>

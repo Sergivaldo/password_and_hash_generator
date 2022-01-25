@@ -15,6 +15,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class GeneratorController implements Initializable {
+	
+
+    @FXML
+    private Button minimize_btt;
+	
 	@FXML
 	private Button close_btt;
 
@@ -57,6 +62,14 @@ public class GeneratorController implements Initializable {
 		Stage stage = (Stage) button.getScene().getWindow();
 		stage.close();
 	}
+	
+	@FXML
+    public void minimize(ActionEvent event) {
+		Button button = (Button) event.getSource();
+		Stage stage = (Stage) button.getScene().getWindow();
+		stage.setIconified(true);
+    }
+
 	
 	private void set_color_btt(Button btt_pressed, Button unpressed_btt){
 		String style_pressed_btt = "-fx-background-color:#D1C4E9; -fx-background-radius:12; "
