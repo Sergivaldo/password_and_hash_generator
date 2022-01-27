@@ -1,22 +1,25 @@
 package application.controller;
 
-
-
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
+import application.model.Letters;
+import application.model.Numbers;
+import application.model.Symbols;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class PasswordViewController implements Initializable {
 	private Clipboard clipboard;
@@ -47,8 +50,6 @@ public class PasswordViewController implements Initializable {
 	private RadioButton radio_16;
 
 	@FXML
-	private Button close_btt;
-	@FXML
 	private CheckBox check_number;
 	@FXML
 	private CheckBox check_symbol;
@@ -61,88 +62,134 @@ public class PasswordViewController implements Initializable {
 
 	private StringBuilder builder_pass = new StringBuilder();
 
-	private String password;
 	/**
-	 * índice 0 = maíusculas;
-	 * índice 1 = minúsculas;
-	 * índice 2 = símbolos;
-	 * índice 3 = números;
-	 * */
+	 * índice 0 = maíusculas; índice 1 = minúsculas; índice 2 = símbolos; índice 3 =
+	 * números;
+	 */
 	private int[] count_chars = new int[4];
-	
-	private int length,max_length;
-	
+
+	private int current_length, max_length;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		select_maxLenght(null);
-		
+		select_max_lenght(null);
 	}
-	
-	@FXML
-	public void create_pass() {
 
-	}
-	
 	@FXML
-	public void select_maxLenght(ActionEvent event) {
+	public void select_max_lenght(ActionEvent e) {
 		RadioButton radio = (RadioButton) length_group.getSelectedToggle();
 		max_length = Integer.parseInt(radio.getText());
-		System.out.println(max_length);
 	}
-	
+
 	public void select_chars(ActionEvent e) {
-		
 		CheckBox checkbox = (CheckBox) e.getSource();
 		if (checkbox.isSelected()) {
 			switch (checkbox.getId()) {
-				case "check_upper":
-					count_chars[0]++;
-					break;
-				case "check_lower":
-					count_chars[1]++;
-					break;
-				case "check_symbol":
-					count_chars[2]++;
-					break;
-				case "check_number":
-					count_chars[3]++;
-					break;
+			case "check_upper":
+				count_chars[0]++;
+				current_length++;
+				break;
+			case "check_lower":
+				count_chars[1]++;
+				current_length++;
+				break;
+			case "check_symbol":
+				count_chars[2]++;
+				current_length++;
+				break;
+			case "check_number":
+				count_chars[3]++;
+				current_length++;
+				break;
 			}
-
 		} else {
-			
 			switch (checkbox.getId()) {
-				case "check_upper":
-					count_chars[0]--;
-					break;
-				case "check_lower":
-					count_chars[1]--;
-					break;
-				case "check_symbol":
-					count_chars[2]--;
-					break;
-				case "check_number":
-					count_chars[3]--;
-					break;
+			case "check_upper":
+				count_chars[0]--;
+				current_length--;
+				break;
+			case "check_lower":
+				count_chars[1]--;
+				current_length--;
+				break;
+			case "check_symbol":
+				count_chars[2]--;
+				current_length--;
+				break;
+			case "check_number":
+				count_chars[3]--;
+				current_length--;
+				break;
 			}
 		}
-		
-		System.out.println(count_chars[0]+" "+count_chars[1]+" "+count_chars[2]+" "+count_chars[3]);
+
 	}
-	
-	
-	public void generate() {
-		for(int character:count_chars) {
-			if(character > 0)
-				add_char(0,0);
+
+	@FXML
+	public void generate(ActionEvent e) {
+
+		int i = 0;
+		while (current_length < max_length) {
+			if (i >= count_chars.length)
+				i = 0;
+
+			if (count_chars[i] > 0)
+				count_chars[i] = size_increment(count_chars[i]);
+
+			if (i < count_chars.length) {
+				i++;
+			}
+		}
+
+		for (int j = 0; j < count_chars.length; j++) {
+			add_char(count_chars[j], j);
+		}
+		password_text.setText(builder_pass.toString());
+		System.out.println(builder_pass.toString());
+		reset();
+	}
+
+	private void add_char(int n_char, int type_char) {
+		for (int i = 0; i < n_char; i++) {
+			switch (type_char) {
+			case 0:
+				builder_pass.append(Letters.getRandomUpper());
+				break;
+			case 1:
+				builder_pass.append(Letters.getRandomLower());
+				break;
+			case 2:
+				builder_pass.append(Symbols.getRandomSymbol());
+				break;
+			case 3:
+				builder_pass.append(Numbers.getRandomNumber());
+				break;
+			}
 		}
 	}
-	
-	private void add_char(int n_char, int lenght_pass) {
-		
+
+	private void reset() {
+		builder_pass.delete(0, builder_pass.length());
+		current_length = 0;
+		for (int i = 0; i < count_chars.length; i++) {
+			if (count_chars[i] > 0) {
+				count_chars[i] = 1;
+				current_length += count_chars[i];
+			}
+		}
 	}
-	
-	
+
+	private int size_increment(int n_char) {
+		if (current_length < max_length) {
+			int max_chars = max_length - current_length;
+			int random_value = new Random().nextInt((max_chars - 1) + 1) + 1;
+			current_length += random_value;
+			return n_char + random_value;
+		} else {
+			return n_char;
+		}
+
+	}
 
 	@FXML
 	private void copy(ActionEvent event) throws InterruptedException {
@@ -151,9 +198,24 @@ public class PasswordViewController implements Initializable {
 		content = new ClipboardContent();
 		content.putString(password);
 		clipboard.setContent(content);
-		message_label.setText("Copy to Clipboard!");
+		show_copy_message();
+
 	}
 
-	
+	private void show_copy_message() {
+		message_label.setVisible(true);
+		message_label.setText("Copy to Clipboard!");
+		PauseTransition transition = new PauseTransition(Duration.millis(2000));
+		transition.setOnFinished(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				message_label.setVisible(false);
+				message_label.setText("");
+			}
+
+		});
+		transition.play();
+	}
 
 }
