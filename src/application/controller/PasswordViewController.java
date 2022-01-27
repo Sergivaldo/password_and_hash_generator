@@ -23,64 +23,82 @@ import javafx.util.Duration;
 
 public class PasswordViewController implements Initializable {
 	private Clipboard clipboard;
+	
 	private ClipboardContent content;
-
+    
 	@FXML
 	private Label password_text;
 
 	@FXML
 	private Button gen_btt;
-
+	
 	@FXML
 	private Button copy_btt;
-
+	
 	@FXML
 	private RadioButton radio_4;
-
-	@FXML
-	private Label message_label;
-
-	@FXML
-	private ToggleGroup length_group;
-
+	
 	@FXML
 	private RadioButton radio_8;
-
+	
 	@FXML
 	private RadioButton radio_16;
-
+	
+	@FXML
+	private Label message_label;
+	
+	@FXML
+	private ToggleGroup length_group;
+	
 	@FXML
 	private CheckBox check_number;
+	
 	@FXML
 	private CheckBox check_symbol;
-
+	
 	@FXML
 	private CheckBox check_upper;
-
+	
 	@FXML
 	private CheckBox check_lower;
-
+	
 	private StringBuilder builder_pass = new StringBuilder();
 
+	
 	/**
-	 * índice 0 = maíusculas; índice 1 = minúsculas; índice 2 = símbolos; índice 3 =
-	 * números;
+	 * Array que contém a quantidade de caracteres de cada tipo.<br>
+	 * <b>0</b> - contador de caracteres de letras maiusculas.<br>
+	 * <b>1</b> - contador de caracteres de letras minusculas.<br>
+	 * <b>2</b> - contador de caracteres de símbolos.<br>
+	 * <b>3</b> - contador de caracteres de números.<br>
 	 */
 	private int[] count_chars = new int[4];
-
+	
 	private int current_length, max_length;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		select_max_lenght(null);
 	}
-
+	/**
+	 * Verifica qual RadioButton está selecionado e atribui o seu valor ao<br>
+	 * tamanho máximo da senha.
+	 * @param e - Evento.
+	 */
 	@FXML
 	public void select_max_lenght(ActionEvent e) {
 		RadioButton radio = (RadioButton) length_group.getSelectedToggle();
 		max_length = Integer.parseInt(radio.getText());
 	}
-
+	
+	/**
+	 * Verifica as <b>CheckBox</b> que estão marcadas e incrementa 1 ao seu respectivo contador e ao tamanho atual da senha.
+	 * O inverso acontecerá se a <b>CheckBox</b> for desmarcada.<br>
+	 * Quando uma <b>CheckBox</b> é marcada, é garantido que ao menos 1 caractere do tipo selecionado será<br>
+	 * adicionado a senha.
+	 * 
+	 * @param e - Evento
+	 */
 	public void select_chars(ActionEvent e) {
 		CheckBox checkbox = (CheckBox) e.getSource();
 		if (checkbox.isSelected()) {
@@ -124,7 +142,11 @@ public class PasswordViewController implements Initializable {
 		}
 
 	}
-
+	
+	/**
+	 * Chama os métodos <b>size_increment</b> 
+	 * @param e - Evento.
+	 */
 	@FXML
 	public void generate(ActionEvent e) {
 

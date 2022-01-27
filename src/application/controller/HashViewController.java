@@ -46,7 +46,10 @@ public class HashViewController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		load_combo_itens();
 	}
-
+	
+	/**
+	 * Carrega uma Lista de Strings com o nome dos algoritmos de hash e adiciona a lista dentro da ComboBox.
+	 */
 	private void load_combo_itens() {
 		ObservableList<String> obs_combo_itens = FXCollections.observableArrayList("MD2", "MD5", "SHA-1", "SHA-256",
 				"SHA-386", "SHA-512");
