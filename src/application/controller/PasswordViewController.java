@@ -143,10 +143,6 @@ public class PasswordViewController implements Initializable {
 
 	}
 	
-	/**
-	 * Chama os métodos <b>size_increment</b> 
-	 * @param e - Evento.
-	 */
 	@FXML
 	public void generate(ActionEvent e) {
 
@@ -167,10 +163,15 @@ public class PasswordViewController implements Initializable {
 			add_char(count_chars[j], j);
 		}
 		password_text.setText(builder_pass.toString());
-		System.out.println(builder_pass.toString());
 		reset();
 	}
-
+	
+	/**
+	 * Adiciona uma certa quantidade de caracteres de um determinado tipo a senha.
+	 * 
+	 * @param n_char - número de caracteres de um determinado tipo.
+	 * @param type_char - tipo de caractere que será incrementado na senha (Letra, número ou símbolo).
+	 */
 	private void add_char(int n_char, int type_char) {
 		for (int i = 0; i < n_char; i++) {
 			switch (type_char) {
@@ -189,7 +190,11 @@ public class PasswordViewController implements Initializable {
 			}
 		}
 	}
-
+	
+	/**
+	 * Reseta a construtor da senha e os contadores. Com isso não surgirá bugs relacionados ao tamanho<br>
+	 * da senha que poderia ficar do maior que o especificado pelo usuário.
+	 */
 	private void reset() {
 		builder_pass.delete(0, builder_pass.length());
 		current_length = 0;
@@ -200,7 +205,12 @@ public class PasswordViewController implements Initializable {
 			}
 		}
 	}
-
+	
+	/**
+	 * Incrementa o contador de caracteres de um determinado tipo de forma aleatória.
+	 * @param n_char - contador de caracteres de um determinado tipo
+	 * @return Inteiro com o novo valor do contador.
+	 */
 	private int size_increment(int n_char) {
 		if (current_length < max_length) {
 			int max_chars = max_length - current_length;
@@ -212,9 +222,13 @@ public class PasswordViewController implements Initializable {
 		}
 
 	}
-
+	/**
+	 * Faz uma copia da senha e mostra uma mensagem ao usuário.
+	 * @param e - Evento
+	 * @throws InterruptedException
+	 */
 	@FXML
-	private void copy(ActionEvent event) throws InterruptedException {
+	private void copy(ActionEvent e) throws InterruptedException {
 		String password = password_text.getText();
 		clipboard = Clipboard.getSystemClipboard();
 		content = new ClipboardContent();
@@ -223,7 +237,9 @@ public class PasswordViewController implements Initializable {
 		show_copy_message();
 
 	}
-
+	/**
+	 * Mostra uma mensagem ao usuário por um determinado periodo.
+	 */
 	private void show_copy_message() {
 		message_label.setVisible(true);
 		message_label.setText("Copy to Clipboard!");
